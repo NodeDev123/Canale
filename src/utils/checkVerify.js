@@ -15,6 +15,7 @@ export async function accountValid(ctx) {
             tgID: true,
         },
     });
+
     const result = await CHANNELS.reduce(async (statPromise, channel) => {
         const stat = await statPromise;
         const user = await ctx.telegram.getChatMember(
@@ -22,7 +23,9 @@ export async function accountValid(ctx) {
             ctx.from.id
         );
         const userLeft = !(user.status === "left" || user.status === "kicked");
+
         return stat * userLeft;
     }, true);
+
     return result;
 }

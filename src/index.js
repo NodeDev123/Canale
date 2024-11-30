@@ -768,7 +768,7 @@ bot.on("callback_query", async (ctx) => {
     const language_code = ctx.from?.language_code === "fr" ? "fr" : "en";
 
     if (command === "verify") {
-        const isAccountValid = accountValid(ctx);
+        const isAccountValid = await accountValid(ctx);
 
         if (!isAccountValid) {
             await ctx.reply(lang[language_code].invalid);
